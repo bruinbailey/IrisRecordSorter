@@ -119,7 +119,7 @@ private: // Disallowed SortingMachine1 Operations
 // Local Operations
 //----------------------------------------------------------------
 template <class T, class TCallback>
-void SortingMachine2<T, TCallback>::split(ListOfT& l, ListOfT& l1, ListOfT& l2)
+void SortingMachine1<T, TCallback>::split(ListOfT& l, ListOfT& l1, ListOfT& l2)
 //! clears l
 //! replaces l1, l2
 //! requires: |l| > 1
@@ -133,7 +133,7 @@ void SortingMachine2<T, TCallback>::split(ListOfT& l, ListOfT& l1, ListOfT& l2)
 //----------------------------------------------------------------
 
 template <class T, class TCallback>
-void SortingMachine2<T, TCallback>::merge(ListOfT& l, ListOfT& l1, ListOfT& l2)
+void SortingMachine1<T, TCallback>::merge(ListOfT& l, ListOfT& l1, ListOfT& l2)
 //! replaces l
 //! clears l1, l2
 //! ensures: sorted(q) and perms(l, #l1 * #l2)
@@ -144,7 +144,7 @@ void SortingMachine2<T, TCallback>::merge(ListOfT& l, ListOfT& l1, ListOfT& l2)
 //----------------------------------------------------------------
 
 template <class T, class TCallback>
-void SortingMachine2<T, TCallback>::mergeSort (ListOfT& l)
+void SortingMachine1<T, TCallback>::mergeSort (ListOfT& l)
 //! updates l
 //! ensures: sorted(l) and perms(l, #l)
 //! decreasing: |l|

@@ -13,7 +13,7 @@
 
 using namespace std;
  
-void doInputPersonDataFromFile(IrisSequence& personData)
+void doInputPersonDataFromFile(IrisSequence& irisData)
 {
    string filename = "iris.txt";
    ifstream infile(filename);

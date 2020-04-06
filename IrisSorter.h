@@ -20,4 +20,4 @@ public:
    }; // areOrdered
 };
 
-typedef SortingMachine1<IrisRecord, ZipComparer> IrisRecordSorter;
+typedef SortingMachine1<IrisRecord, PetalLengthComparer> IrisRecordSorter;
