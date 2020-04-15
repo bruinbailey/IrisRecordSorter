@@ -127,7 +127,21 @@ void SortingMachine1<T, TCallback>::split(ListOfT& l, ListOfT& l1, ListOfT& l2)
 //!          floor(|#l|/2) <= |l1| <= ceiling(|#l|/2) and
 //!          floor(|#l|/2) <= |l2| <= ceiling(|#l|/2)
 {
-
+	T x;
+	int i = 0;
+	int z = l.rightLength();
+	for (; i < z; i++) {
+		l.removeRightFront(x);
+		if ( i < z/2) {
+			l1.addRightFront(x);
+			l1.advance();
+		} else {
+			l2.addRightFront(x);
+			l2.advance();
+		} // end if/else
+	} // end for
+	l1.moveToStart();
+	l2.moveToStart();
 } // split
 
 //----------------------------------------------------------------
@@ -138,7 +152,40 @@ void SortingMachine1<T, TCallback>::merge(ListOfT& l, ListOfT& l1, ListOfT& l2)
 //! clears l1, l2
 //! ensures: sorted(q) and perms(l, #l1 * #l2)
 {
+	T rec1, rec2;
+	int l1length = l1.rightLength();
+	int l2length = l2.rightLength();
 
+	while ( l1length > 0 && l2length > 0) {
+		l1.removeRightFront(rec1);
+		l2.removeRightFront(rec2);
+
+		if (TCallback::areOrdered(rec1, rec2)) {
+			l.addRightFront(rec1);
+			l2.addRightFront(rec2);
+			l1length--;
+		} else {
+			l.addRightFront(rec2);
+			l1.addRightFront(rec1);
+			l2length--;
+		} // end if
+		l.advance();
+
+	} // end while
+
+	while (l2length > 0) {
+		l2.removeRightFront(rec2);
+		l.addRightFront(rec2);
+		l2length--;
+		l.advance();
+	} // end while
+
+	while (l1length > 0) {
+		l1.removeRightFront(rec1);
+		l.addRightFront(rec1);
+		l1length--;
+		l.advance();
+	}
 } // merge
 
 //----------------------------------------------------------------
@@ -149,7 +196,13 @@ void SortingMachine1<T, TCallback>::mergeSort (ListOfT& l)
 //! ensures: sorted(l) and perms(l, #l)
 //! decreasing: |l|
 {
-
+	if ( l.rightLength() > 1) {
+		ListOfT L1, L2;
+		split(l, L1, L2);
+		mergeSort(L1);
+		mergeSort(L2);
+		merge(l, L1, L2);
+	} // end if
 } // mergeSort
 
 
